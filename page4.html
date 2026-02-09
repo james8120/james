@@ -18,6 +18,7 @@
       animation: fadeIn 1s forwards;
       overflow-x: hidden;
       position: relative;
+      height: 100vh;
     }
 
     @keyframes fadeIn {
@@ -52,6 +53,7 @@
 
     button:hover { transform: scale(1.05); }
 
+    /* Floating button hearts */
     .heart {
       color: #ff4d6d;
       font-size: 24px;
@@ -70,13 +72,12 @@
       font-size: 12px;
       opacity: 0.3;
       pointer-events: none;
-      animation: floatHeart 6s linear infinite;
+      animation: floatUp linear infinite;
     }
 
-    @keyframes floatHeart {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(15deg); }
-      100% { transform: translateY(0) rotate(-15deg); }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-50px) rotate(360deg); }
     }
   </style>
 </head>
@@ -115,15 +116,16 @@
     });
 
     // Background hearts
-    for (let i = 0; i < 6; i++) {
+    const numberOfHearts = 8; // change for more/fewer hearts
+    for (let i = 0; i < numberOfHearts; i++) {
       const bgHeart = document.createElement("span");
       bgHeart.textContent = "💖";
       bgHeart.className = "bg-heart";
       bgHeart.style.left = Math.random() * window.innerWidth + "px";
-      bgHeart.style.top = Math.random() * window.innerHeight + "px";
       bgHeart.style.fontSize = (10 + Math.random() * 20) + "px";
       bgHeart.style.opacity = 0.2 + Math.random() * 0.3;
       bgHeart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      bgHeart.style.animationDelay = Math.random() * 5 + "s";
       document.body.appendChild(bgHeart);
     }
   </script>
