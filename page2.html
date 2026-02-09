@@ -1,89 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Still here 💛</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Baloo 2', cursive;
       margin: 0;
-      padding: 60px;
-      text-align: center;
-      color: #333;
-      background: linear-gradient(135deg, #fff1c1, #fff7e6);
-      opacity: 0;
-      animation: fadeIn 1s forwards;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fff1c1, #fff7e6, #ffe8a3);
+      color: #4a3b1f;
+      overflow: hidden;
+      animation: fadeIn 1.2s ease forwards;
     }
 
     @keyframes fadeIn {
+      from { opacity: 0; }
       to { opacity: 1; }
     }
 
+    /* Card */
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 50px 60px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(255, 195, 95, 0.35);
+      position: relative;
+      z-index: 2;
+    }
+
     h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
+      font-size: 3.1em;
+      margin-bottom: 15px;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.3em;
       margin: 10px 0;
     }
 
+    /* Button */
     button {
-      background-color: #ffc75f;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #ffc75f, #ffb347);
       border: none;
-      padding: 14px 28px;
-      font-size: 16px;
-      border-radius: 20px;
+      padding: 16px 36px;
+      font-size: 17px;
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: 999px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      color: #5a3d00;
+      box-shadow: 0 10px 20px rgba(255, 179, 71, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     button:hover {
-      background-color: #ffb347;
-      transform: scale(1.05);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(255, 179, 71, 0.6);
     }
 
-    .heart {
-      color: #ff4d6d;
-      font-size: 24px;
-      animation: float 1s ease-out forwards;
+    /* Floating sparkles */
+    .sparkle {
       position: absolute;
+      font-size: 22px;
+      animation: floatUp 2s ease-out forwards;
+      pointer-events: none;
     }
 
-    @keyframes float {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-50px); }
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-80px) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* Background glow icons */
+    .bg-sparkle {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.18;
+      animation: drift 12s linear infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-120px); }
     }
   </style>
 </head>
 
 <body>
-  <h1>Okay so.</h1>
-  <p>Hi.</p>
-  <p>I miss you.</p>
-  <p>Like… a lot.</p>
 
-  <br>
+  <!-- Background sparkles -->
+  <span class="bg-sparkle" style="left: 15%; animation-delay: 0s;">✨</span>
+  <span class="bg-sparkle" style="left: 45%; animation-delay: 4s;">💛</span>
+  <span class="bg-sparkle" style="left: 75%; animation-delay: 8s;">🌼</span>
 
-  <a href="page3.html">
-    <button>What is happening</button>
-  </a>
+  <div class="card">
+    <h1>Okay so.</h1>
+    <p>Hi.</p>
+    <p>I miss you.</p>
+    <p>Like… a lot.</p>
+
+    <a href="page3.html">
+      <button>What is happening</button>
+    </a>
+  </div>
 
   <script>
     const btn = document.querySelector("button");
-    btn.addEventListener("click", () => {
-      const heart = document.createElement("span");
-      heart.textContent = "💖";
-      heart.className = "heart";
-      heart.style.left = btn.offsetLeft + btn.offsetWidth/2 + "px";
-      heart.style.top = btn.offsetTop + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1000);
+
+    btn.addEventListener("click", (e) => {
+      for (let i = 0; i < 4; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.textContent = ["✨", "💛", "🌼"][Math.floor(Math.random() * 3)];
+        sparkle.className = "sparkle";
+        sparkle.style.left = e.clientX + Math.random() * 40 - 20 + "px";
+        sparkle.style.top = e.clientY + "px";
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 2000);
+      }
     });
   </script>
+
 </body>
 </html>
+
