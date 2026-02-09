@@ -18,7 +18,7 @@
       animation: fadeIn 1s forwards;
       overflow-x: hidden;
       position: relative;
-      height: 100vh;
+      min-height: 150vh; /* ensure page is tall enough */
     }
 
     @keyframes fadeIn {
@@ -76,8 +76,8 @@
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(100vh) rotate(0deg); }   /* start below screen */
-      100% { transform: translateY(-50px) rotate(360deg); } /* end above top */
+      0% { transform: translateY(calc(100%)); }   /* start at bottom of page */
+      100% { transform: translateY(calc(-100% - 50px)) rotate(360deg); } /* go above top */
     }
   </style>
 </head>
@@ -117,11 +117,13 @@
 
     // Background hearts
     const numberOfHearts = 8; // change for more/fewer hearts
+    const pageHeight = document.body.scrollHeight; // full page height
     for (let i = 0; i < numberOfHearts; i++) {
       const bgHeart = document.createElement("span");
       bgHeart.textContent = "💖";
       bgHeart.className = "bg-heart";
       bgHeart.style.left = Math.random() * window.innerWidth + "px";
+      bgHeart.style.top = Math.random() * pageHeight + "px"; // anywhere along page
       bgHeart.style.fontSize = (10 + Math.random() * 20) + "px";
       bgHeart.style.opacity = 0.2 + Math.random() * 0.3;
       bgHeart.style.animationDuration = (8 + Math.random() * 5) + "s";
