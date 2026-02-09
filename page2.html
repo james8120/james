@@ -1,24 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Still here</title>
+  <title>Still here 💛</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+
   <style>
     body {
-      background-color: #fff1c1;
-      font-family: Arial, sans-serif;
-      text-align: center;
+      font-family: 'Baloo 2', cursive;
+      margin: 0;
       padding: 60px;
+      text-align: center;
+      color: #333;
+      background: linear-gradient(135deg, #fff1c1, #fff7e6);
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
     button {
       background-color: #ffc75f;
       border: none;
-      padding: 14px 24px;
+      padding: 14px 28px;
       font-size: 16px;
       border-radius: 20px;
       cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #ffb347;
+      transform: scale(1.05);
+    }
+
+    .heart {
+      color: #ff4d6d;
+      font-size: 24px;
+      animation: float 1s ease-out forwards;
+      position: absolute;
+    }
+
+    @keyframes float {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-50px); }
     }
   </style>
 </head>
+
 <body>
   <h1>Okay so.</h1>
   <p>Hi.</p>
@@ -30,5 +72,18 @@
   <a href="page3.html">
     <button>What is happening</button>
   </a>
+
+  <script>
+    const btn = document.querySelector("button");
+    btn.addEventListener("click", () => {
+      const heart = document.createElement("span");
+      heart.textContent = "💖";
+      heart.className = "heart";
+      heart.style.left = btn.offsetLeft + btn.offsetWidth/2 + "px";
+      heart.style.top = btn.offsetTop + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+  </script>
 </body>
 </html>
