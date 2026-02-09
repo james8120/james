@@ -1,135 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>For you, doc 💕</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Baloo 2', cursive;
       margin: 0;
-      padding: 40px;
-      text-align: center;
-      color: #333;
-      background: linear-gradient(135deg, #f3e8ff, #ffe8f0);
-      opacity: 0;
-      animation: fadeIn 1s forwards;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #f3e8ff, #ffe8f0, #fbe7ff);
+      color: #3a2d3f;
       overflow-x: hidden;
-      position: relative;
-      min-height: 150vh; /* ensure page is tall enough */
+      animation: fadeIn 1.4s ease forwards;
     }
 
     @keyframes fadeIn {
+      from { opacity: 0; }
       to { opacity: 1; }
     }
 
+    /* Card */
+    .card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      border-radius: 32px;
+      padding: 50px 55px 60px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 30px 55px rgba(200, 160, 220, 0.35);
+      position: relative;
+      z-index: 2;
+    }
+
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
+      font-size: 2.9em;
+      margin-bottom: 12px;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.25em;
       margin: 10px 0;
+    }
+
+    strong {
+      color: #a45ac7;
     }
 
     iframe {
       margin-top: 30px;
-      border-radius: 12px;
-    }
-
-    button {
-      background-color: #ffb6c1;
+      width: 100%;
+      height: 352px;
+      border-radius: 18px;
       border: none;
-      padding: 12px 24px;
-      border-radius: 12px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Button */
+    button {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #ffb6c1, #f59ac1);
+      border: none;
+      padding: 15px 34px;
+      font-size: 17px;
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: 999px;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-      transition: transform 0.2s;
+      color: white;
+      box-shadow: 0 12px 22px rgba(245, 154, 193, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    button:hover { transform: scale(1.05); }
+    button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 18px 30px rgba(245, 154, 193, 0.6);
+    }
 
-    /* Floating button hearts */
+    /* Button hearts */
     .heart {
-      color: #ff4d6d;
-      font-size: 24px;
-      animation: float 1s ease-out forwards;
       position: absolute;
+      font-size: 22px;
+      animation: floatUp 2s ease-out forwards;
+      pointer-events: none;
     }
 
-    @keyframes float {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-50px); }
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-80px) scale(1.3);
+        opacity: 0;
+      }
     }
 
     /* Background hearts */
     .bg-heart {
       position: absolute;
-      font-size: 12px;
-      opacity: 0.3;
+      font-size: 20px;
+      opacity: 0.18;
       pointer-events: none;
-      animation: floatUp linear infinite;
+      animation: drift 14s linear infinite;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(calc(100%)); }   /* start at bottom of page */
-      100% { transform: translateY(calc(-100% - 50px)) rotate(360deg); } /* go above top */
+    @keyframes drift {
+      from { transform: translateY(110vh); }
+      to { transform: translateY(-140px) rotate(360deg); }
     }
   </style>
 </head>
 
 <body>
-  <h1>For you, doc 💕</h1>
-  <p>A little something for your bus ride</p>
 
-  <!-- Spotify playlist embed -->
-  <iframe data-testid="embed-iframe"
-          style="border-radius:12px"
-          src="https://open.spotify.com/embed/playlist/6A8h9aSQt72XI1AxVLSzLA?utm_source=generator"
-          width="100%"
-          height="352"
-          frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy">
-  </iframe>
+  <!-- Background hearts -->
+  <span class="bg-heart" style="left: 12%; animation-delay: 0s;">💗</span>
+  <span class="bg-heart" style="left: 38%; animation-delay: 4s;">💖</span>
+  <span class="bg-heart" style="left: 62%; animation-delay: 7s;">💕</span>
+  <span class="bg-heart" style="left: 85%; animation-delay: 10s;">💞</span>
 
-  <p><strong>Diagnosis:</strong> rapid heartbeat detected.</p>
-  <p>Text me when you get here 💗</p>
+  <div class="card">
+    <h1>For you, doc 💕</h1>
+    <p>A little something for your bus ride</p>
 
-  <button>Send some love 💖</button>
+    <!-- Spotify playlist embed -->
+    <iframe
+      src="https://open.spotify.com/embed/playlist/6A8h9aSQt72XI1AxVLSzLA?utm_source=generator"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+
+    <p><strong>Diagnosis:</strong> rapid heartbeat detected.</p>
+    <p>Text me when you get here 💗</p>
+
+    <button>Send some love 💖</button>
+  </div>
 
   <script>
-    // Floating button hearts
     const btn = document.querySelector("button");
-    btn.addEventListener("click", () => {
-      const heart = document.createElement("span");
-      heart.textContent = "💖";
-      heart.className = "heart";
-      heart.style.left = btn.offsetLeft + btn.offsetWidth/2 + "px";
-      heart.style.top = btn.offsetTop + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1000);
-    });
 
-    // Background hearts
-    const numberOfHearts = 8; // change for more/fewer hearts
-    const pageHeight = document.body.scrollHeight; // full page height
-    for (let i = 0; i < numberOfHearts; i++) {
-      const bgHeart = document.createElement("span");
-      bgHeart.textContent = "💖";
-      bgHeart.className = "bg-heart";
-      bgHeart.style.left = Math.random() * window.innerWidth + "px";
-      bgHeart.style.top = Math.random() * pageHeight + "px"; // anywhere along page
-      bgHeart.style.fontSize = (10 + Math.random() * 20) + "px";
-      bgHeart.style.opacity = 0.2 + Math.random() * 0.3;
-      bgHeart.style.animationDuration = (8 + Math.random() * 5) + "s";
-      bgHeart.style.animationDelay = Math.random() * 5 + "s";
-      document.body.appendChild(bgHeart);
-    }
+    btn.addEventListener("click", (e) => {
+      for (let i = 0; i < 5; i++) {
+        const heart = document.createElement("span");
+        heart.textContent = "💖";
+        heart.className = "heart";
+        heart.style.left = e.clientX + Math.random() * 40 - 20 + "px";
+        heart.style.top = e.clientY + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    });
   </script>
+
 </body>
 </html>
