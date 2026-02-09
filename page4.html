@@ -71,4 +71,32 @@
   <p>Or just because.</p>
 
   <!-- Spotify playlist embed -->
-  <iframe d
+  <iframe data-testid="embed-iframe"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/playlist/6A8h9aSQt72XI1AxVLSzLA?utm_source=generator"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+  </iframe>
+
+  <p><strong>Diagnosis:</strong> rapid heartbeat detected.</p>
+  <p>Text me when you get here 💗</p>
+
+  <button>Send some love 💖</button>
+
+  <script>
+    const btn = document.querySelector("button");
+    btn.addEventListener("click", () => {
+      const heart = document.createElement("span");
+      heart.textContent = "💖";
+      heart.className = "heart";
+      heart.style.left = btn.offsetLeft + btn.offsetWidth/2 + "px";
+      heart.style.top = btn.offsetTop + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+  </script>
+</body>
+</html>
