@@ -1,82 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Hey doc 💗</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Baloo 2', cursive;
       margin: 0;
-      padding: 60px;
-      text-align: center;
-      background: linear-gradient(135deg, #fdecef, #fff0f5);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fdecef, #fff0f5, #fde2e4);
       color: #333;
-      opacity: 0;
-      animation: fadeIn 1s forwards;
+      overflow: hidden;
+      animation: fadeIn 1.2s ease forwards;
     }
 
     @keyframes fadeIn {
+      from { opacity: 0; }
       to { opacity: 1; }
     }
 
+    /* Card */
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 50px 60px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(255, 140, 170, 0.25);
+      position: relative;
+      z-index: 2;
+    }
+
     h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
+      font-size: 3.2em;
+      margin-bottom: 15px;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.25em;
       margin: 10px 0;
     }
 
+    em {
+      color: #ff6f91;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* Button */
     button {
-      background-color: #ff8fab;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #ff8fab, #ff6f91);
       border: none;
-      padding: 14px 28px;
-      font-size: 16px;
-      border-radius: 20px;
+      padding: 16px 36px;
+      font-size: 17px;
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: 999px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      color: white;
+      box-shadow: 0 10px 20px rgba(255, 111, 145, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     button:hover {
-      background-color: #ff6f91;
-      transform: scale(1.05);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(255, 111, 145, 0.5);
     }
 
+    /* Floating hearts */
     .heart {
-      color: #ff4d6d;
-      font-size: 24px;
-      animation: float 1s ease-out forwards;
       position: absolute;
+      font-size: 20px;
+      animation: floatUp 2s ease-out forwards;
+      pointer-events: none;
     }
 
-    @keyframes float {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-50px); }
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-80px) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Background hearts */
+    .bg-heart {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.15;
+      animation: drift 10s linear infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-120px); }
     }
   </style>
 </head>
 
 <body>
-  <h1>Hey doc 💗</h1>
-  <p>I made something for you.</p>
-  <p>Please proceed with caution.</p>
-  <p><em>(This is not a drill.)</em></p>
 
-  <br>
+  <!-- Background hearts -->
+  <span class="bg-heart" style="left: 10%; animation-delay: 0s;">💗</span>
+  <span class="bg-heart" style="left: 50%; animation-delay: 3s;">💖</span>
+  <span class="bg-heart" style="left: 80%; animation-delay: 6s;">💞</span>
 
-  <a href="page2.html">
-    <button>I’m proceeding</button>
-  </a>
+  <div class="card">
+    <h1>Hey doc 💗</h1>
+    <p>I made something for you.</p>
+    <p>Please proceed with caution.</p>
+    <p><em>(This is not a drill.)</em></p>
+
+    <a href="page2.html">
+      <button>I’m proceeding</button>
+    </a>
+  </div>
 
   <script>
     const btn = document.querySelector("button");
-    btn.addEventListener("click", () => {
-      const heart = document.createElement("span");
-      heart.textContent = "💖";
-      heart.className = "heart";
-      heart.style.left = btn.offsetLeft + btn.off
+
+    btn.addEventListener("click", (e) => {
+      for (let i = 0; i < 5; i++) {
+        const heart = document.createElement("span");
+        heart.textContent = "💖";
+        heart.className = "heart";
+        heart.style.left = e.clientX + Math.random() * 40 - 20 + "px";
+        heart.style.top = e.clientY + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 2000);
+      }
+    });
+  </script>
+
+</body>
+</html>
+
